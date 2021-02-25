@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin Board</title>
+    <link rel="stylesheet" href="/public/css-style/style.css">
+</head>
+
+<body>
+    <div id="site-mode"></div>
+
+    <form method="POST" id="form" action="http://localhost:3000/api/add-ad/">
+        <div class="bulletin-area">
+            <div class="product-name">
+                <input name="productName" type="text" placeholder="Product name">
+            </div>
+            <div class="description">
+                <textarea name="description" id="description" cols="30" rows="5" placeholder="Description"></textarea>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <div id="bulletin-board"></div>
+    <div id="pages"></div>
+
+
+    <div id="search-block">
+        <input type="text" name="searchArea" placeholder="Search..." id="search-area">
+        <button type="submit" id="search-button"></button>
+    </div>
+
+    <div id="icon"><a onclick="themes()" href="https://icons8.com/icon/111487/search">Search icon by Icons8</a></div>
+    <script src="/public/js/app.js"></script>
+</body>
+
+</html>

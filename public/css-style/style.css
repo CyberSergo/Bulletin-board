@@ -1,0 +1,277 @@
+body {
+  background-color: #f2f4f5;
+}
+
+#form {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.product-name input {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 3vh;
+  border: 0;
+  background-color: #b6ddff;
+  border-radius: 5px;
+  color: black;
+  font-size: 1em;
+  font-family: system-ui;
+}
+
+.description textarea {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 3vh;
+  border: 0;
+  background-color: #b6ddff;
+  border-radius: 5px;
+  color: black;
+  font-size: 1em;
+  font-family: system-ui;
+  resize: none;
+}
+
+.buttons button {
+  width: 20%;
+  padding: 8px;
+  border-radius: 5px;
+  border: solid;
+  font-family: system-ui;
+  font-weight: bolder;
+  transition-duration: 300ms;
+  outline: none;
+}
+
+.buttons button:hover {
+  width: 25%;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 20px;
+  background-color: #b6ddff;
+}
+
+.buttons {
+  height: 7vh;
+  text-align: center;
+}
+
+#bulletin-board {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2em;
+  grid-auto-rows: minmax(230px, auto);
+  justify-items: center;
+}
+
+#bulletin-board:hover {
+  cursor: pointer;
+}
+
+#bulletin-board .bulletin {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+}
+
+#bulletin-board .bulletin .bulletin-name {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+#bulletin-board .bulletin .bulletin-description {
+  width: 90%;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.ad-name {
+  text-align: center;
+  font-size: 4em;
+  font-family: sans-serif;
+  width: 75%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10vh;
+  margin-top: 10vh;
+}
+
+.ad-description {
+  font-size: 1em;
+  font-family: sans-serif;
+  width: 75%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  min-height: 40vh;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+#go-back {
+  font-family: system-ui;
+  margin-left: 13%;
+}
+
+#pages {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.number-of-page {
+  margin: 7px;
+}
+
+.number-of-page:hover {
+  cursor: pointer;
+}
+
+.on-focus {
+  color: red;
+}
+
+#search-block {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+#search-area {
+  padding: 10px;
+  width: 50%;
+  border-radius: 3px;
+  border: 0;
+}
+
+#search-button {
+  background: #f2f4f5;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+#search-button img {
+  width: 33px;
+}
+
+#search-result {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 2em;
+  margin-bottom: 10vh;
+}
+
+#icon {
+  text-align: center;
+}
+
+#icon a {
+  top: 97%;
+  color: black;
+}
+
+#site-mode img {
+  width: 100px;
+  float: right;
+  margin-right: 5%;
+  cursor: pointer;
+}
+
+.black-input {
+  background-color: #00315d !important;
+  color: #dada02 !important;
+}
+
+.black-button {
+  background-color: #00315d !important;
+  color: #dada02 !important;
+  border-color: #0e0041 !important;
+}
+
+.black-body {
+  background-color: #00093a !important;
+  color: #dada02 !important;
+}
+
+.go-back-night {
+  color: #dada02;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (max-device-width: 480px) {
+  #form {
+    width: 90%;
+    margin-top: 0vh;
+  }
+
+  #bulletin-board {
+    width: 97%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    grid-auto-rows: minmax(230px, auto);
+    justify-items: center;
+  }
+
+  .buttons button {
+    width: 40%;
+  }
+
+  #search-block {
+    width: 100%;
+  }
+
+  #pages {
+    width: 100%;
+  }
+
+  .product-name input {
+    margin-top: 10vh;
+    width: 60%;
+  }
+
+  #bulletin-board .bulletin .bulletin-name {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    word-break: break-all;
+    font-family: sans-serif;
+  }
+
+  #search-area {
+    padding: 10px;
+    width: 70%;
+    border-radius: 3px;
+    border: 0;
+  }
+
+  #bulletin-board .bulletin .bulletin-description {
+    width: 90%;
+    margin: 0 auto;
+    font-family: sans-serif;
+    word-break: break-all;
+  }
+}
