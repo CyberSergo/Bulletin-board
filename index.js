@@ -53,10 +53,6 @@ app.get('/api/number-of-pages/', function (req, res) {
   });
 });
 
-
-
-
-
 // Get all ads
 
 app.get('/api/all-ads/', function (req, res) {

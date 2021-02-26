@@ -10,17 +10,17 @@ let siteMode = document.getElementById('site-mode');
 let serverPath = "http://localhost:3000";
 const xhttp = new XMLHttpRequest;
 let numberOfPages = serverPath + "/api/number-of-pages/";
-
+console.log(window.location.pathname)
 
 let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
         ad[i].addEventListener("click", function () {
-                document.location.href = `${serverPath}/single-ad?id=${this.id}`
+            document.location.href = `${serverPath}/single-ad?id=${this.id}`
         });
     };
 };
 
- 
+
 
 form.addEventListener('submit', event => {
 
@@ -60,7 +60,7 @@ form.addEventListener('submit', event => {
 
 
 let LoadSixAds = function (number) {
-    if(number == undefined) {
+    if (number == undefined) {
         number = 1
     }
     bulletinBoard.innerHTML = ""
@@ -71,16 +71,20 @@ let LoadSixAds = function (number) {
         .then(data => {
             data.forEach(element => {
                 bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div></div>`;
-                
+
             });
-             newAdID()
+            newAdID()
             if (localStorage.getItem('theme') == 'black') {
-                blackTheme()
+                document.querySelectorAll('.bulletin').forEach(div => {
+                    div.classList.add('black-input');
+                });
             } else {
-                whiteTheme()
+                document.querySelectorAll('.bulletin').forEach(div => {
+                    div.classList.remove('black-input')
+                });
             }
         })
-}
+}   
 LoadSixAds();
 
 let allPages = function () {
@@ -119,58 +123,3 @@ allPages()
 searchButton.addEventListener('click', function () {
     document.location.href = `${serverPath}/search?id=${searchInput.value}`
 });
-
-// Local storage change theme
-
-siteMode.addEventListener('click', function () {
-    if (localStorage.getItem('theme') == 'black') {
-        localStorage.setItem('theme', 'white')
-        whiteTheme()
-    } else if (localStorage.getItem('theme') == undefined) {
-        localStorage.setItem('theme', 'black')
-        blackTheme()
-
-    } else {
-        localStorage.setItem('theme', 'black')
-        blackTheme()
-    }
-})
-
-
-//Themes:
-
-let blackTheme = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/office/480/000000/sun--v1.png"/>`
-    document.body.classList.add('black-body');
-    document.querySelector('.product-name input').classList.add('black-input');
-    document.querySelector('.description textarea').classList.add('black-input');
-    document.querySelector('.buttons button').classList.add('black-button');
-    document.querySelectorAll('.bulletin').forEach(div => {
-        div.classList.add('black-input');
-    });
-    document.querySelector('#search-button').classList.add('black-body');
-    document.querySelector('#search-area').classList.add('black-input');
-};
-
-let whiteTheme = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/pastel-glyph/64/000000/search--v1.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/plasticine/100/000000/crescent-moon.png"/>`
-    document.body.classList.remove('black-body');
-    document.querySelector('.product-name input').classList.remove('black-input');
-    document.querySelector('.description textarea').classList.remove('black-input');
-    document.querySelector('.buttons button').classList.remove('black-button');
-    document.querySelectorAll('.bulletin').forEach(div => {
-        div.classList.remove('black-input')
-    });
-    document.querySelector('#search-button').classList.remove('black-body');
-    document.querySelector('#search-area').classList.remove('black-input');
-};
-
-
-if (localStorage.getItem('theme') == 'black') {
-    blackTheme()
-} else {
-    whiteTheme()
-}
-

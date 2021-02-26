@@ -67,6 +67,7 @@ body {
   grid-gap: 2em;
   grid-auto-rows: minmax(230px, auto);
   justify-items: center;
+  word-break: break-all;
 }
 
 #bulletin-board:hover {
@@ -105,6 +106,7 @@ body {
   border-radius: 10px;
   margin-bottom: 10vh;
   margin-top: 10vh;
+  word-break: break-all;
 }
 
 .ad-description {
@@ -117,6 +119,7 @@ body {
   min-height: 40vh;
   box-sizing: border-box;
   padding: 30px;
+  word-break: break-all;
 }
 
 #go-back {

@@ -1,28 +1,23 @@
-let siteMode = document.getElementById('site-mode');
 
-function themes() {
-    if (localStorage.getItem('theme') == 'black') {
-        localStorage.setItem('theme', 'white')
-        whiteTheme()
-    } else if (localStorage.getItem('theme') == undefined) {
-        localStorage.setItem('theme', 'black')
-        blackTheme()
+if (window.location.pathname == '/') {
+    let siteModeX = document.getElementById('site-mode');
 
-    } else {
-        localStorage.setItem('theme', 'black')
-        blackTheme()
-    }
+    siteModeX.addEventListener('click', function () {
+        if (localStorage.getItem('theme') == 'black') {
+            localStorage.setItem('theme', 'white')
+            whiteThemeHP()
+        } else if (localStorage.getItem('theme') == undefined) {
+            localStorage.setItem('theme', 'black')
+            blackThemeHP()
+
+        } else {
+            localStorage.setItem('theme', 'black')
+            blackThemeHP()
+        }
+    })
 }
 
-
-if (localStorage.getItem('theme') == 'black') {
-    blackTheme()
-} else {
-    whiteTheme()
-}
-
-
-
+// Themes for Home Page
 
 let blackThemeHP = function () {
     document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
@@ -52,9 +47,7 @@ let whiteThemeHP = function () {
     document.querySelector('#search-area').classList.remove('black-input');
 };
 
-
-
-
+// Themes for Single page
 
 let blackThemeSingle = function () {
     document.body.classList.add('black-body');
@@ -70,8 +63,7 @@ let whiteThemeSingle = function () {
     description.classList.remove('black-input');
 };
 
-
-
+// Themes for Search page
 
 let blackThemeSearch = function () {
     document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
@@ -95,3 +87,43 @@ let whiteThemeSearch = function () {
         div.classList.remove('black-input')
     });
 };
+
+switch (window.location.pathname) {
+    case "/":
+        switch (localStorage.getItem('theme')) {
+            case "black":
+                blackThemeHP();
+                break;
+            default:
+                whiteThemeHP();
+        };
+        break;
+    case "/single-ad":
+        switch (localStorage.getItem('theme')) {
+            case "black":
+                blackThemeSingle();
+                break;
+            default:
+                whiteThemeSingle();
+        };
+        break;
+    case "/search":
+        switch (localStorage.getItem('theme')) {
+            case "black":
+                blackThemeSearch();
+                break;
+            default:
+                whiteThemeSearch();
+        };
+        break;
+    case "/search/single-ad":
+        switch (localStorage.getItem('theme')) {
+            case "black":
+                blackThemeSingle();
+                break;
+            default:
+                whiteThemeSingle();
+        };
+        break;
+}
+

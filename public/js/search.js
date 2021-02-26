@@ -5,7 +5,7 @@ let searchButton = document.getElementById('search-button');
 let searchArea = document.getElementById('search-area');
 let searchResult = document.getElementById('search-result');
 
-
+console.log(window.location.pathname)
 function getUrlId() {
     let id = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -51,41 +51,14 @@ let searchData = function (search) {
             searchResult.innerHTML = `<span>"${decodeURI(search)}": ${numberOfElement} search results</span>`
 
             if (localStorage.getItem('theme') == 'black') {
-                blackTheme()
+                document.querySelectorAll('.bulletin').forEach(div => {
+                    div.classList.add('black-input')
+                });
             } else {
-                whiteTheme()
+                document.querySelectorAll('.bulletin').forEach(div => {
+                    div.classList.remove('black-input')
+                });
             }
         })
 }
 searchData(id)
-
-
-let blackTheme = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
-    document.body.classList.add('black-body');
-    document.querySelector('#go-back a').classList.add('go-back-night')
-    document.querySelector('#search-area').classList.add('black-input');
-    document.querySelector('#search-button').classList.add('black-body');
-    document.querySelectorAll('.bulletin').forEach(div => {
-        div.classList.add('black-input')
-    });
-
-};
-
-let whiteTheme = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/pastel-glyph/64/000000/search--v1.png"/>`
-    document.body.classList.remove('black-body');
-    document.querySelector('#go-back a').classList.remove('go-back-night')
-    document.querySelector('#search-area').classList.remove('black-input');
-    document.querySelector('#search-button').classList.remove('black-body');
-    document.querySelectorAll('.bulletin').forEach(div => {
-        div.classList.remove('black-input')
-    });
-};
-
-
-if (localStorage.getItem('theme') == 'black') {
-    blackTheme()
-} else {
-    whiteTheme()
-}
