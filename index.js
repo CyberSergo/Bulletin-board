@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const { json } = require("body-parser");
+const mysql = require("mysql");
 
 // Connect static files
 
@@ -18,6 +19,30 @@ app.use(cors());
 let adsOnPage = 6;
 let indexOfArray = 0;
 let searchArray = [];
+
+// Connect to database
+
+const conn = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "bulletin-board",
+  password: ""
+});
+
+conn.connect(err => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('DATABASE-----------OK');
+  }
+});
+
+conn.query('SELECT * FROM ads;', (err, result, field) => {
+  console.log(err);
+  console.log(result[0]); 
+})
+
+
 //API SERVER
 
 // Get 6 ads from array
