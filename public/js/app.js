@@ -10,7 +10,7 @@ let siteMode = document.getElementById('site-mode');
 let serverPath = "http://localhost:3000";
 const xhttp = new XMLHttpRequest;
 let numberOfPages = serverPath + "/api/number-of-pages/";
-console.log(window.location.pathname)
+
 
 let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
@@ -42,17 +42,11 @@ form.addEventListener('submit', event => {
             alert(this.responseText)
         }
     }
+    LoadSixAds();
+    newAdID();
+    allPages();
 
     xhttp.send(JSON.stringify(data));
-
-    xhttp.onloadend = function () {
-        if (this.responseText !== 'Error') {
-            bulletinBoard.innerHTML = ""
-            LoadSixAds();
-            newAdID()
-            allPages()
-        }
-    };
 
     form.productName.value = "";
     form.description.value = "";

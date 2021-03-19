@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 const cors = require('cors');
-const { json } = require("body-parser");
 const mysql = require("mysql");
+
 
 // Connect static files
 
@@ -37,11 +37,6 @@ conn.connect(err => {
   }
 });
 
-conn.query('SELECT * FROM ads;', (err, result, field) => {
-  console.log(err);
-  console.log(result[0]); 
-})
-
 
 //API SERVER
 
@@ -49,14 +44,18 @@ conn.query('SELECT * FROM ads;', (err, result, field) => {
 app.get('/api/page/:number', function (req, res) {
 
   if (req.params.number !== undefined && req.params.number !== "") {
-    fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-      let str = data.replace(/(?:\r\n|\\n)/g, '<br>');
-      bulletinArr = JSON.parse(str);
+    conn.query('SELECT * FROM ads;', (err, result, field) => {
+      let bulletinArr = []
+      result.forEach(e => {
+        bulletinArr.push(e)
+      })
+
       let start = (req.params.number - 1) * adsOnPage;
       let end = start + adsOnPage;
-      let result = bulletinArr.slice(start, end)
-      res.json(result)
-    });
+      let reverseArr = bulletinArr.reverse()
+      let ads = reverseArr.slice(start, end)
+      res.json(ads)
+    })
   } else {
     res.send("Error, bad page number!")
   }
@@ -64,48 +63,40 @@ app.get('/api/page/:number', function (req, res) {
 })
 
 
+// Get number of page
 
 app.get('/api/number-of-pages/', function (req, res) {
-  fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-    let str = data.replace(/(?:\r\n|\\n)/g, '<br>');
-    bulletinArr = JSON.parse(str);
-    bulletinArr.forEach(element => {
-      indexOfArray++
-    });
-    let countOfItems = Math.ceil(indexOfArray / adsOnPage);
-    indexOfArray = 0;
+  conn.query('SELECT COUNT(id) FROM  ads;', (err, result, field) => {
+    let countOfItems = Math.ceil(result[0]['COUNT(id)'] / adsOnPage);
     res.json(countOfItems);
   });
 });
 
+
 // Get all ads
 
 app.get('/api/all-ads/', function (req, res) {
-  fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-    let str = data.replace(/(?:\r\n|\\n)/g, '<br>');
-    bulletinArr = JSON.parse(str);
-    res.json(bulletinArr)
+  conn.query('SELECT * FROM ads;', (err, result, field) => {
+    res.json(result)
   });
 });
 
 // GET request for take single object from bulletin array
 
 app.get("/api/single-ad/:id", function (req, res) {
-  let singleArr = []
-  fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-    let str = data.replace(/(?:\r\n|\\n)/g, '<br>');
-    let singleAd = JSON.parse(str);
-    singleAd.forEach(e => singleArr.push(e))
-    let neededObj = singleArr.find(neededId => neededId.id == req.params.id)
-    res.json(neededObj)
-  });
+  conn.query(`SELECT * FROM ads WHERE id= ${req.params.id}`, (err, result) => {
+    res.json(result)
+  })
 });
+
+
 
 // GET request for take single object from search page
 
 app.get("/api/search/single-ad/:id", function (req, res) {
-  res.json(searchArray[req.params.id])
-
+  conn.query(`SELECT * FROM ads WHERE id= ${req.params.id}`, (err, result) => {
+    res.json(result)
+  })
 });
 
 // Make a post request for add new ad to array
@@ -113,21 +104,15 @@ app.get("/api/search/single-ad/:id", function (req, res) {
 app.post("/api/add-ad/", function (req, res) {
   if (req.body.productName !== undefined && req.body.description !== undefined) {
     if (req.body.productName.trim() !== "" && req.body.description.trim() !== "") {
-      fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-        if (data != false) {
-          req.body.id = JSON.parse(data)[0].id + 1;
-          bulletinArr.unshift(req.body);
-          fs.writeFile('./bulletin-array.json', JSON.stringify(bulletinArr), function () {
-            res.send('New ad has been created successfully')
-          });
+      console.log(req.body.productName)
+      conn.query("INSERT INTO ads (id, productName, description, req_date) VALUES (NULL, '" + req.body.productName + "', '" + req.body.description + "', current_timestamp());", function (err, result) {
+        console.log("1 record inserted");
+        if (err) {
+          console.log(err);
         } else {
-          req.body.id = 1
-          bulletinArr.unshift(req.body)
-          fs.writeFile('./bulletin-array.json', JSON.stringify(bulletinArr), function () {
-            res.send('New ad has been created successfully')
-          });
-        };
-      });
+          console.log(result)
+        }
+      })
     } else {
       res.send('Error')
     }
@@ -140,30 +125,14 @@ app.post("/api/add-ad/", function (req, res) {
 
 app.get('/api/search/:query', function (req, res) {
   if (req.params.query != undefined || req.params.query.trim() != '') {
-    searchArray = [];
-    fs.readFile("bulletin-array.json", "utf-8", function (err, data) {
-      let str = data.replace(/(?:\r\n|\\n)/g, '<br>');
-      bulletinArr = JSON.parse(str);
-
-      bulletinArr.forEach(function (e) {
-
-        let searchBase = e.productName.toUpperCase()
-        let searchingValue = req.params.query.toUpperCase()
-
-
-        if (searchBase.indexOf(searchingValue) != -1) {
-          searchArray.push(e)
-        }
-      })
-      res.json(searchArray)
-    });
+    conn.query(`SELECT * FROM ads WHERE productName LIKE "%${req.params.query}%"`, (err, result) => {
+      console.log(err)
+      res.json(result)
+    }) 
   } else {
     res.send('Error')
   }
-
-})
-
-
+});
 
 
 //Frontend Server (BASIC)
@@ -190,4 +159,3 @@ app.get('/search/single-ad/', function (req, res) {
 app.listen(port, () => {
   console.log(`The server is running on: http://localhost:${port}`)
 });
-

@@ -8,14 +8,13 @@ function getUrlId() {
         id[key] = value;
     });
     return id;
-}
-console.log(window.location.pathname)
+};
 
 fetch(`http://localhost:3000/api/single-ad/${id}`)
     .then(result => {
         return result.json()
     })
     .then(data => {
-        productName.innerHTML = data.productName;
-        description.innerHTML = data.description;
+        productName.innerHTML = data[0].productName;
+        description.innerHTML = data[0].description;
     })

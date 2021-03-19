@@ -5,7 +5,6 @@ let searchButton = document.getElementById('search-button');
 let searchArea = document.getElementById('search-area');
 let searchResult = document.getElementById('search-result');
 
-console.log(window.location.pathname)
 function getUrlId() {
     let id = {};
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -18,9 +17,9 @@ let ad = document.getElementsByClassName('bulletin')
 
 let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
-        ad[i].id = i
         ad[i].addEventListener("click", function () {
-            document.location.href = `http://localhost:3000/search/single-ad?id=${this.id}`
+            console.log(this.productName)
+             document.location.href = `http://localhost:3000/search/single-ad?id=${this.id}`
         });
     };
 };
@@ -44,8 +43,9 @@ let searchData = function (search) {
         })
         .then(data => {
             data.forEach(element => {
+                console.log(element)
                 numberOfElement++
-                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin"><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div></div>`;
+                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div></div>`;
                 newAdID()
             });
             searchResult.innerHTML = `<span>"${decodeURI(search)}": ${numberOfElement} search results</span>`
