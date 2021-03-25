@@ -1,4 +1,4 @@
-let form = document.getElementById('form');
+// let form = document.getElementById('form');
 let bulletinBoard = document.getElementById('bulletin-board');
 let page = document.querySelectorAll('#pages div');
 let ad = document.getElementsByClassName('bulletin');
@@ -6,11 +6,13 @@ let pagesBlock = document.getElementById('pages');
 let searchButton = document.getElementById('search-button');
 let searchInput = document.getElementById('search-area');
 let siteMode = document.getElementById('site-mode');
+let userMenu = document.getElementById('user-menu')
+let tags = document.getElementsByClassName('tag')
 
 let serverPath = "http://localhost:3000";
 const xhttp = new XMLHttpRequest;
 let numberOfPages = serverPath + "/api/number-of-pages/";
-
+let filter = 'unfilter'
 
 let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
@@ -20,51 +22,22 @@ let newAdID = function () {
     };
 };
 
-
-
-form.addEventListener('submit', event => {
-
-    event.preventDefault()
-
-    let data = {};
-
-    for (let i = 0; i < form.length; i++) {
-        let input = form[i];
-        if (input.name) {
-            data[input.name] = input.value;
-        }
-    }
-
-    xhttp.open(form.method, form.action, true);
-    xhttp.setRequestHeader('Content-Type', "application/json; charset=UTF-8");
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            alert(this.responseText)
-        }
-    }
-    LoadSixAds();
-    newAdID();
-    allPages();
-
-    xhttp.send(JSON.stringify(data));
-
-    form.productName.value = "";
-    form.description.value = "";
-});
-
+userMenu.addEventListener('click', event => {
+    window.location = `${serverPath}/user/add-bulletin`
+})
 
 let LoadSixAds = function (number) {
     if (number == undefined) {
         number = 1
     }
     bulletinBoard.innerHTML = ""
-    fetch(serverPath + `/api/page/${number}`)
+    fetch(serverPath + `/api/page/${number}/${filter}`)
         .then(result => {
             return result.json()
         })
         .then(data => {
             data.forEach(element => {
-                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div></div>`;
+                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div><div class="bulletin-category"> ${element.category} </div></div>`;
 
             });
             newAdID()
@@ -106,7 +79,7 @@ let allPages = function () {
 
                     this.classList.add('on-focus')
                     let number = element.innerHTML
-                    fetch(`${serverPath}/api/page/${number}`)
+                    fetch(`${serverPath}/api/page/${number}/${filter}`)
                         .then(LoadSixAds(number))
                 })
             })
@@ -117,3 +90,25 @@ allPages()
 searchButton.addEventListener('click', function () {
     document.location.href = `${serverPath}/search?id=${searchInput.value}`
 });
+
+function filterNew() {
+    filter = 'filterNew';
+    LoadSixAds()
+};
+
+function filterUsed() {
+    filter = 'filterUsed';
+    LoadSixAds()
+};
+
+function unfilter() {
+    window.location = serverPath
+}
+
+
+for (let i = 0; i < tags.length; i++) {
+    const element = tags[i];
+    element.addEventListener('click', function() {
+       window.location = `http://localhost:3000/search?id=${this.innerHTML.replace('#', '')}`  
+    }); 
+};

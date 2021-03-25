@@ -68,6 +68,7 @@ body {
   grid-auto-rows: minmax(230px, auto);
   justify-items: center;
   word-break: break-all;
+  margin-top: 36px;
 }
 
 #bulletin-board:hover {
@@ -78,6 +79,7 @@ body {
   width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
+  position: relative;
 }
 
 #bulletin-board .bulletin .bulletin-name {
@@ -94,6 +96,7 @@ body {
   width: 90%;
   margin: 0 auto;
   font-family: sans-serif;
+  margin-bottom: 10%;
 }
 
 .ad-name {
@@ -190,10 +193,111 @@ body {
   color: black;
 }
 
+#user-menu {
+  cursor: pointer;
+}
+
+#categories div {
+  margin: 15px;
+}
+
+#categories {
+  font-family: system-ui;
+}
+
+.bulletin-category {
+  font-family: system-ui;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 10px;
+  right: 5%;
+  font-family: system-ui;
+  font-weight: bolder;
+}
+
+#big-block-filter {
+  width: 14%;
+  margin: 0 auto;
+  padding: 9px;
+  margin-top: 16px;
+  border-radius: 20px;
+}
+
+#filter {
+  width: 91%;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  background: white;
+  padding: 9px;
+  margin-top: 16px;
+  font-family: system-ui;
+  font-weight: bolder;
+}
+
+#big-block-filter:hover .filter-blocks {
+  display: block;
+}
+
+.filter-block span:hover {
+  font-weight: 900;
+}
+
+.tag:hover {
+  font-weight: 900;
+}
+
+#tags {
+  display: none;
+}
+
+#filter-tag-block:hover #tags{
+  display: block;
+}
+
+#filter-tag-block span span {
+  writing-mode: vertical-rl;
+  font-family: cursive;
+}
+
+.filter-blocks {
+  width: 14%;
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  background: #f2f4f5;
+  left: 43%;
+  cursor: pointer;
+  border-radius: 39px;
+  display: none;
+  opacity: 85%;
+  font-family: system-ui;
+  font-weight: 500;
+}
+
+.filter-block {
+  padding: 20px;
+  border-bottom: solid 1px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+#filter span span {
+  writing-mode: vertical-rl;
+  font-family: cursive;
+}
+
+#header-block {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+}
+
 #site-mode img {
   width: 100px;
-  float: right;
-  margin-right: 5%;
   cursor: pointer;
 }
 
@@ -215,6 +319,10 @@ body {
 
 .go-back-night {
   color: #dada02;
+}
+
+.filter-black {
+  background: #00093a;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -277,4 +385,28 @@ body {
     font-family: sans-serif;
     word-break: break-all;
   }
+
+  #big-block-filter {
+    width: 46%;
+    margin: 0 auto;
+    padding: 9px;
+    margin-top: 16px;
+    border-radius: 20px;
+}
+
+.filter-blocks {
+  width: 46%;
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  background: #f2f4f5;
+  left: 28%;
+  cursor: pointer;
+  border-radius: 39px;
+  display: none;
+  opacity: 85%;
+  font-family: system-ui;
+  font-weight: 500;
+}
 }

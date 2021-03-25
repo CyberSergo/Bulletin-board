@@ -19,7 +19,7 @@ let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
         ad[i].addEventListener("click", function () {
             console.log(this.productName)
-             document.location.href = `http://localhost:3000/search/single-ad?id=${this.id}`
+             document.location.href = `http://localhost:3000/single-ad?id=${this.id}`
         });
     };
 };
@@ -36,7 +36,7 @@ let numberOfElement = 0
 let searchData = function (search) {
 
 
-    fetch(`http://localhost:3000/api/search/${search}`)
+    fetch(`http://localhost:3000/api/search/${search.replace('#', '')}`)
         .then(result => {
             numberOfElement = 0
             return result.json()
