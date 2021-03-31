@@ -80,6 +80,9 @@ body {
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
   position: relative;
+  max-height: 30vh;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 #bulletin-board .bulletin .bulletin-name {
@@ -97,11 +100,23 @@ body {
   margin: 0 auto;
   font-family: sans-serif;
   margin-bottom: 10%;
+  max-height: 32%;
+  overflow: hidden;
+}
+
+.footer-block {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  background-color: white;
+  position: absolute;
+  bottom: 0px;
+  left: 5%;
 }
 
 .ad-name {
   text-align: center;
-  font-size: 4em;
+  font-size: 3em;
   font-family: sans-serif;
   width: 75%;
   margin: 0 auto;
@@ -110,6 +125,8 @@ body {
   margin-bottom: 10vh;
   margin-top: 10vh;
   word-break: break-all;
+  box-sizing: border-box;
+  padding: 30px;
 }
 
 .ad-description {
@@ -194,7 +211,17 @@ body {
 }
 
 #user-menu {
+  text-align: end;
+}
+
+#user-menu img{
+  width: 60px;
   cursor: pointer;
+}
+
+.black-user{
+  background-color: #dada02;
+  border-radius: 100%;
 }
 
 #categories div {
@@ -203,14 +230,12 @@ body {
 
 #categories {
   font-family: system-ui;
+  margin-bottom: 6vh;
 }
 
 .bulletin-category {
   font-family: system-ui;
   font-weight: bolder;
-  position: absolute;
-  bottom: 10px;
-  right: 5%;
   font-family: system-ui;
   font-weight: bolder;
 }
@@ -236,23 +261,77 @@ body {
   font-weight: bolder;
 }
 
-#big-block-filter:hover .filter-blocks {
-  display: block;
-}
-
-.filter-block span:hover {
-  font-weight: 900;
-}
-
-.tag:hover {
-  font-weight: 900;
+.tag-instruction {
+  font-family: system-ui;
+  margin: 15px;
 }
 
 #tags {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 3vh;
+  border: 0;
+  background-color: #b6ddff;
+  border-radius: 5px;
+  color: black;
+  font-size: 1em;
+  font-family: system-ui;
+}
+
+#tags-bulletin {
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.tags-hp {
+  width: 70%;
+  word-break: break-word;
+  font-size: x-small;
+}
+
+.tag-big-block {
+  position: relative;
+}
+
+.tag-small-block {
+  margin: 1em;
+  cursor: pointer;
+  background: lightgray;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 1s;
+}
+
+.tag-small-block-black {
+  background-color: #00315d;
+}
+
+.tag-small-block-black:hover {
+  background-color: #0404c1 !important; 
+}
+
+.tag-small-block:hover {
+  background: #9a9a9a;
+}
+
+#tag-big-block:hover .delete-button {
+  display: block;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.delete-button {
+  transform: rotate(45deg);
+  position: absolute;
+  left: 82%;
+  top: 10px;
   display: none;
 }
 
-#filter-tag-block:hover #tags{
+#big-block-filter:hover .filter-blocks {
   display: block;
 }
 
@@ -297,7 +376,7 @@ body {
 }
 
 #site-mode img {
-  width: 100px;
+  width: 60px;
   cursor: pointer;
 }
 
@@ -317,8 +396,14 @@ body {
   color: #dada02 !important;
 }
 
+#go-back a {
+  color: black;
+  text-decoration: none;
+  font-weight: 900;
+}
+
 .go-back-night {
-  color: #dada02;
+  color: #dada02 !important;
 }
 
 .filter-black {
@@ -384,6 +469,7 @@ body {
     margin: 0 auto;
     font-family: sans-serif;
     word-break: break-all;
+    max-height: 30%;
   }
 
   #big-block-filter {
@@ -392,21 +478,46 @@ body {
     padding: 9px;
     margin-top: 16px;
     border-radius: 20px;
-}
+  }
 
-.filter-blocks {
-  width: 46%;
+  .filter-blocks {
+    width: 46%;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    background: #f2f4f5;
+    left: 28%;
+    cursor: pointer;
+    border-radius: 39px;
+    display: none;
+    opacity: 85%;
+    font-family: system-ui;
+    font-weight: 500;
+  }
+
+  .ad-name {
+    text-align: center;
+    font-size: 2em;
+    font-family: sans-serif;
+    width: 95%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 4vh;
+    margin-top: 8vh;
+    word-break: break-all;
+}
+.ad-description {
+  font-size: 1em;
+  font-family: sans-serif;
+  width: 95%;
   margin: 0 auto;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  background: #f2f4f5;
-  left: 28%;
-  cursor: pointer;
-  border-radius: 39px;
-  display: none;
-  opacity: 85%;
-  font-family: system-ui;
-  font-weight: 500;
+  background: white;
+  border-radius: 10px;
+  min-height: 40vh;
+  box-sizing: border-box;
+  padding: 30px;
+  word-break: break-all;
 }
 }

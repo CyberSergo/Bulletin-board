@@ -20,13 +20,14 @@ if (window.location.pathname == '/') {
 // Themes for Home Page
 
 let blackThemeHP = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/office/480/000000/sun--v1.png"/>`
-    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/plasticine/100/000000/user-menu-male.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/search.png"/>`
+    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/fluent/48/000000/sun.png"/>`
+    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/user-male-circle.png"/>`
     document.body.classList.add('black-body');
     document.querySelectorAll('.bulletin').forEach(div => {
         div.classList.add('black-input');
     });
+    document.querySelector('#user-menu img').classList.add('black-user')
     document.querySelector('#filter-blocks').classList.add('filter-black')
     document.querySelector('#filter').classList.add('black-input');
     document.querySelector('#search-button').classList.add('black-body');
@@ -34,9 +35,9 @@ let blackThemeHP = function () {
 };
 
 let whiteThemeHP = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/pastel-glyph/64/000000/search--v1.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/plasticine/100/000000/crescent-moon.png"/>`
-    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/carbon-copy/100/000000/user-menu-male.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/ios/96/000000/search--v1.png"/>`
+    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/ios-glyphs/90/000000/bright-moon--v2.png"/>`
+    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/windows/96/000000/user-male-circle.png"/>`
     document.body.classList.remove('black-body');
     document.querySelectorAll('.bulletin').forEach(div => {
         div.classList.remove('black-input')
@@ -53,6 +54,9 @@ let blackThemeSingle = function () {
     document.body.classList.add('black-body');
     document.querySelector('#go-back a').classList.add('go-back-night');
     document.querySelector('#ad-name').classList.add('black-input');
+    document.querySelectorAll('.tag-small-block').forEach(div => {
+        div.classList.add('tag-small-block-black');
+    })
     description.classList.add('black-input');
 };
 
@@ -60,13 +64,16 @@ let whiteThemeSingle = function () {
     document.body.classList.remove('black-body');
     document.querySelector('#go-back a').classList.remove('go-back-night');
     document.querySelector('#ad-name').classList.remove('black-input');
+    document.querySelectorAll('.tag-small-block').forEach(div => {
+        div.classList.remove('tag-small-block-black');
+    })
     description.classList.remove('black-input');
 };
 
 // Themes for Search page
 
 let blackThemeSearch = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/dusk/64/000000/search--v1.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/search.png"/>`
     document.body.classList.add('black-body');
     document.querySelector('#go-back a').classList.add('go-back-night')
     document.querySelector('#search-area').classList.add('black-input');
@@ -78,7 +85,7 @@ let blackThemeSearch = function () {
 };
 
 let whiteThemeSearch = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/pastel-glyph/64/000000/search--v1.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/ios/96/000000/search--v1.png"/>`
     document.body.classList.remove('black-body');
     document.querySelector('#go-back a').classList.remove('go-back-night')
     document.querySelector('#search-area').classList.remove('black-input');
@@ -96,6 +103,7 @@ let blackThemeUser = function () {
     document.querySelector('.description textarea').classList.add('black-input');
     document.querySelector('.buttons button').classList.add('black-button');
     document.querySelector('#go-back a').classList.add('go-back-night');
+    document.querySelector('#tags').classList.add('black-input');
 }
 
 let whiteThemeUser = function () {
@@ -104,6 +112,7 @@ let whiteThemeUser = function () {
     document.querySelector('.description textarea').classList.remove('black-input');
     document.querySelector('.buttons button').classList.remove('black-button');
     document.querySelector('#go-back a').classList.remove('go-back-night');
+    document.querySelector('#tags').classList.remove('black-input');
 }
 
 switch (window.location.pathname) {

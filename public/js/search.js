@@ -18,8 +18,7 @@ let ad = document.getElementsByClassName('bulletin')
 let newAdID = function () {
     for (var i = 0; i < ad.length; i++) {
         ad[i].addEventListener("click", function () {
-            console.log(this.productName)
-             document.location.href = `http://localhost:3000/single-ad?id=${this.id}`
+            document.location.href = `http://localhost:3000/single-ad?id=${this.id}`
         });
     };
 };
@@ -34,31 +33,40 @@ searchButton.addEventListener('click', function () {
 let numberOfElement = 0
 
 let searchData = function (search) {
+    let emptySearch = new RegExp(/(..)/g)
 
-
-    fetch(`http://localhost:3000/api/search/${search.replace('#', '')}`)
-        .then(result => {
-            numberOfElement = 0
-            return result.json()
-        })
-        .then(data => {
-            data.forEach(element => {
-                console.log(element)
-                numberOfElement++
-                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div></div>`;
+    if (search.search(emptySearch) == 0) {
+        fetch(`http://localhost:3000/api/search/${search.replace('#', '')}`)
+            .then(result => {
+                numberOfElement = 0
+                return result.json()
+            })
+            .then(data => {
+                let dataHTML = "";
+                data.forEach(element => {
+                    let tagsJSON = element.tags.replace("[", "").replace("]", "").replaceAll(`"`, ``);
+                    let descriptionBr = element.description.replace(/\n/g, "<br />")
+                    numberOfElement++
+                    dataHTML = dataHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${descriptionBr} </div><div class="footer-block"><div class="tags-hp">${tagsJSON}</div><div class="bulletin-category"> ${element.category} </div></div></div>`;
+                });
+                bulletinBoard.innerHTML = dataHTML;
                 newAdID()
-            });
-            searchResult.innerHTML = `<span>"${decodeURI(search)}": ${numberOfElement} search results</span>`
+                searchResult.innerHTML = `<span>"${decodeURI(search)}": ${numberOfElement} search results</span>`
 
-            if (localStorage.getItem('theme') == 'black') {
-                document.querySelectorAll('.bulletin').forEach(div => {
-                    div.classList.add('black-input')
-                });
-            } else {
-                document.querySelectorAll('.bulletin').forEach(div => {
-                    div.classList.remove('black-input')
-                });
-            }
-        })
+                if (localStorage.getItem('theme') == 'black') {
+                    document.querySelectorAll('.bulletin').forEach(div => {
+                        div.classList.add('black-input')
+                    });
+                } else {
+                    document.querySelectorAll('.bulletin').forEach(div => {
+                        div.classList.remove('black-input')
+                    });
+                }
+            })
+    } else {
+        alert('Not enough values ​​to search')
+    }
+
+
 }
 searchData(id)

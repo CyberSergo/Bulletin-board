@@ -1,4 +1,3 @@
-// let form = document.getElementById('form');
 let bulletinBoard = document.getElementById('bulletin-board');
 let page = document.querySelectorAll('#pages div');
 let ad = document.getElementsByClassName('bulletin');
@@ -7,7 +6,7 @@ let searchButton = document.getElementById('search-button');
 let searchInput = document.getElementById('search-area');
 let siteMode = document.getElementById('site-mode');
 let userMenu = document.getElementById('user-menu')
-let tags = document.getElementsByClassName('tag')
+
 
 let serverPath = "http://localhost:3000";
 const xhttp = new XMLHttpRequest;
@@ -36,10 +35,15 @@ let LoadSixAds = function (number) {
             return result.json()
         })
         .then(data => {
+            let dataHTML = "";
             data.forEach(element => {
-                bulletinBoard.innerHTML = bulletinBoard.innerHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${element.description} </div><div class="bulletin-category"> ${element.category} </div></div>`;
-
+   
+                let tagsJSON = element.tags.replace("[", "").replace("]", "").replaceAll(`"`, ``);
+                let descriptionBr = element.description.replace(/\n/g, "<br />");
+                
+                dataHTML = dataHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${descriptionBr} </div><div class="footer-block"><div class="tags-hp">${tagsJSON}</div><div class="bulletin-category"> ${element.category} </div></div></div>`;
             });
+            bulletinBoard.innerHTML = dataHTML;
             newAdID()
             if (localStorage.getItem('theme') == 'black') {
                 document.querySelectorAll('.bulletin').forEach(div => {
@@ -104,11 +108,3 @@ function filterUsed() {
 function unfilter() {
     window.location = serverPath
 }
-
-
-for (let i = 0; i < tags.length; i++) {
-    const element = tags[i];
-    element.addEventListener('click', function() {
-       window.location = `http://localhost:3000/search?id=${this.innerHTML.replace('#', '')}`  
-    }); 
-};

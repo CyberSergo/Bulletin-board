@@ -1,5 +1,5 @@
+require('dotenv').config()
 const express = require("express");
-const fs = require("fs");
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
@@ -21,9 +21,9 @@ let adsOnPage = 6;
 // Connect to database
 
 const conn = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "bulletin-board",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
   password: ""
 });
 
@@ -41,11 +41,10 @@ conn.query("SET SESSION wait_timeout = 604800")
 
 // Get 6 ads from array
 app.get('/api/page/:number/:filter', function (req, res) {
-  console.log(req.params.filter)
   let sqlRequest = ''
   if (req.params.number !== undefined && req.params.number !== "") {
     if (req.params.filter == 'filterUsed') {
-       sqlRequest = 'SELECT * FROM `ads` ORDER BY `ads`.`category` ASC'
+      sqlRequest = 'SELECT * FROM `ads` ORDER BY `ads`.`category` ASC'
     } else if (req.params.filter == 'filterNew') {
       sqlRequest = 'SELECT * FROM `ads` ORDER BY `ads`.`category` DESC'
     } else {
@@ -61,6 +60,7 @@ app.get('/api/page/:number/:filter', function (req, res) {
       let end = start + adsOnPage;
       let reverseArr = bulletinArr.reverse()
       let ads = reverseArr.slice(start, end)
+
       res.json(ads)
     })
   } else {
@@ -90,8 +90,12 @@ app.get('/api/all-ads/', function (req, res) {
 
 // GET request for take single object from bulletin array
 
-app.get("/api/single-ad/:id", function (req, res) {
-  conn.query(`SELECT * FROM ads WHERE id= ${req.params.id}`, (err, result) => {
+app.get("/api/single-ad/:id", cors(), function (req, res) {
+  let id = req.params.id
+
+  let sql = "SELECT * FROM ads WHERE id= ?"
+
+  conn.query(sql, id, (err, result) => {
     res.json(result)
   })
 });
@@ -101,41 +105,78 @@ app.get("/api/single-ad/:id", function (req, res) {
 // GET request for take single object from search page
 
 app.get("/api/search/single-ad/:id", function (req, res) {
-  conn.query(`SELECT * FROM ads WHERE id= ${req.params.id}`, (err, result) => {
+  let id = req.params.id
+
+  let sql = "SELECT * FROM ads WHERE id= ?"
+
+  conn.query(sql, id, (err, result) => {
     res.json(result)
   })
 });
 
 // Make a post request for add new ad to array
 
-app.post("/user/add-bulletin", function (req, res) {
-  if (req.body.productName !== undefined && req.body.description !== undefined) {
+app.post("/user/add-bulletin", cors(), function (req, res) {
+
+  let tagError = false
+  let numberOfTags = 0
+
+  req.body.tags.forEach(e => {
+    element = e.trim()
+    let regexElement = element.match('[^a-zA-Zа-яА-Я0-9]')
+
+    if (regexElement != null) {
+      tagError = true
+    } else {
+      numberOfTags++
+    }
+  })
+
+
+
+  if (req.body.productName !== undefined && req.body.description !== undefined && tagError == false && numberOfTags < 6) {
     if (req.body.productName.trim() !== "" && req.body.description.trim() !== "") {
-      conn.query("INSERT INTO ads (id, productName, description, req_date, category, tags) VALUES (NULL, '" + req.body.productName + "', '" + req.body.description + "', current_timestamp(), '" + req.body.category + "', '" + req.body.tags + "');", function (err, result) {
+
+      let productName = req.body.productName
+      let description = req.body.description
+      let category = req.body.category
+      let tags = JSON.stringify(req.body.tags)
+   
+      let sql = "INSERT INTO ads (id, productName, description, req_date, category, tags) VALUES (NULL, ?, ?, current_timestamp(), ?, ?);"
+
+      conn.query(sql, [productName, description, category, tags], function (err, result) {
         console.log("1 record inserted");
         if (err) {
           console.log(err);
         } else {
-          console.log(result)
+          res.send('Announcement added')
         }
       })
     } else {
-      res.send('Error')
+      res.send('Please fill in all input fields')
     }
+  } else if (tagError == true || numberOfTags > 5) {
+    res.send('Badly written "Tags" field, please follow the example')
   } else {
-    res.send('Error')
-  };
+    res.send('Please fill in all input fields')
+  }
 });
 
 // Get request for search object in array "bulletin-array"
 
 app.get('/api/search/:query', function (req, res) {
-  console.log(req.params.query) 
+  let emptySearch = new RegExp(/(..)/g)
+
   if (req.params.query != undefined || req.params.query.trim() != '') {
-    console.log(req.params.query + "  Hi")
-    conn.query(`SELECT * FROM ads WHERE tags LIKE "%${req.params.query}%" OR productName LIKE "%${req.params.query}%"`, (err, result) => {
-      res.json(result)
-    }) 
+    if (req.params.query.search(emptySearch) == 0) {
+      let query = "%" + req.params.query + "%"
+          sql = `SELECT * FROM ads WHERE tags LIKE ? OR productName LIKE ?;`
+          conn.query(sql, [query, query], (err, result) => {
+            res.json(result)
+          })
+    } else {
+      res.send('Not enough values ​​to search')
+    }
   } else {
     res.send('Error')
   }
@@ -157,15 +198,17 @@ app.get('/search/', function (req, res) {
   res.sendFile(__dirname + '/pages/search.html')
 });
 
-app.get('/search/single-ad/', function (req, res) {
-  res.sendFile(__dirname + '/pages/search-single-bulletin.html')
-});
-
-app.get('/user/add-bulletin', function(req, res) {
+app.get('/user/add-bulletin', function (req, res) {
   res.sendFile(__dirname + '/pages/add-bulletin-page.html')
 });
+
+
+
+
 
 
 app.listen(port, () => {
   console.log(`The server is running on: http://localhost:${port}`)
 });
+
+
