@@ -55,11 +55,18 @@ let searchData = function (search) {
 
                 if (localStorage.getItem('theme') == 'black') {
                     document.querySelectorAll('.bulletin').forEach(div => {
-                        div.classList.add('black-input')
+                        div.classList.add('black-input');
+    
+                    });
+                    document.querySelectorAll('.footer-block').forEach(div => {
+                        div.classList.add('black-input');
                     });
                 } else {
                     document.querySelectorAll('.bulletin').forEach(div => {
                         div.classList.remove('black-input')
+                    });
+                    document.querySelectorAll('.footer-block').forEach(div => {
+                        div.classList.remove('black-input');
                     });
                 }
             })

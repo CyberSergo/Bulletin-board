@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin Board</title>
+    <link rel="stylesheet" href="/public/css-style/style.css">
+</head>
+
+<body>
+
+    <div id="go-back">
+        <a href="http://localhost:3000/">go back</a>
+    </div>
+
+    <form method="POST" id="form" action="http://localhost:3000/api/user/add-bulletin">
+        <div class="bulletin-area">
+            <div class="product-name">
+                <input name="productName" type="text" placeholder="Product name">
+            </div>
+            <div class="description">
+                <textarea name="description" id="description" cols="30" rows="5" placeholder="Description"></textarea>
+            </div>
+            <div id="categories">
+                <div class="category-select">Please select a category</div>
+                <div>
+                    <input id="used" class="category" type="radio" name="category" value="used" checked>
+                    <label for="used">Used</label>
+                </div>
+
+                <div>
+                    <input id="new" class="category" type="radio" name="category" value="new">
+                    <label for="new">New</label>
+                </div>
+            </div>
+
+            <div>
+                <div class="tag-instruction">
+                    Add tags. Maximum 5 tags. Separate tags with ","
+                    <br>
+                    Use only letters or numbers
+                </div>
+                <input type="text" name="tags" placeholder="Tag1, Tag2" id="tags">
+            </div>
+
+        </div>
+        <div class="buttons">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+
+    <script src="/public/js/add.bulletin-page.js"></script>
+    <script src="/public/js/themes.js"></script>
+</body>
+
+</html>

@@ -20,29 +20,35 @@ if (window.location.pathname == '/') {
 // Themes for Home Page
 
 let blackThemeHP = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/search.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/fluent/48/000000/sun.png"/>`
-    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/user-male-circle.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/search.png"/>`;
+    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/fluent/48/000000/sun.png"/>`;
+    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/fluent/96/000000/user-male-circle.png"/>`;
     document.body.classList.add('black-body');
     document.querySelectorAll('.bulletin').forEach(div => {
         div.classList.add('black-input');
     });
-    document.querySelector('#user-menu img').classList.add('black-user')
-    document.querySelector('#filter-blocks').classList.add('filter-black')
+    document.querySelectorAll('.footer-block').forEach(div => {
+        div.classList.add('black-input');
+    });
+    document.querySelector('#user-menu img').classList.add('black-user');
+    document.querySelector('#filter-blocks').classList.add('filter-black');
     document.querySelector('#filter').classList.add('black-input');
     document.querySelector('#search-button').classList.add('black-body');
     document.querySelector('#search-area').classList.add('black-input');
 };
 
 let whiteThemeHP = function () {
-    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/ios/96/000000/search--v1.png"/>`
-    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/ios-glyphs/90/000000/bright-moon--v2.png"/>`
-    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/windows/96/000000/user-male-circle.png"/>`
+    document.querySelector('#search-button').innerHTML = `<img src="https://img.icons8.com/ios/96/000000/search--v1.png"/>`;
+    document.querySelector('#site-mode').innerHTML = `<img src="https://img.icons8.com/ios-glyphs/90/000000/bright-moon--v2.png"/>`;
+    document.querySelector('#user-menu').innerHTML = `<img src="https://img.icons8.com/windows/96/000000/user-male-circle.png"/>`;
     document.body.classList.remove('black-body');
     document.querySelectorAll('.bulletin').forEach(div => {
-        div.classList.remove('black-input')
+        div.classList.remove('black-input');
     });
-    document.querySelector('#filter-blocks').classList.remove('filter-black')
+    document.querySelectorAll('.footer-block').forEach(div => {
+        div.classList.remove('black-input');
+    });
+    document.querySelector('#filter-blocks').classList.remove('filter-black');
     document.querySelector('#filter').classList.remove('black-input');
     document.querySelector('#search-button').classList.remove('black-body');
     document.querySelector('#search-area').classList.remove('black-input');
@@ -81,7 +87,9 @@ let blackThemeSearch = function () {
     document.querySelectorAll('.bulletin').forEach(div => {
         div.classList.add('black-input')
     });
-
+    document.querySelectorAll('.footer-block').forEach(div => {
+        div.classList.add('black-input');
+    });
 };
 
 let whiteThemeSearch = function () {
@@ -92,6 +100,9 @@ let whiteThemeSearch = function () {
     document.querySelector('#search-button').classList.remove('black-body');
     document.querySelectorAll('.bulletin').forEach(div => {
         div.classList.remove('black-input')
+    });
+    document.querySelectorAll('.footer-block').forEach(div => {
+        div.classList.remove('black-input');
     });
 };
 

@@ -37,25 +37,35 @@ let LoadSixAds = function (number) {
         .then(data => {
             let dataHTML = "";
             data.forEach(element => {
-   
+
                 let tagsJSON = element.tags.replace("[", "").replace("]", "").replaceAll(`"`, ``);
                 let descriptionBr = element.description.replace(/\n/g, "<br />");
-                
-                dataHTML = dataHTML + `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName} </div><div class="bulletin-description"> ${descriptionBr} </div><div class="footer-block"><div class="tags-hp">${tagsJSON}</div><div class="bulletin-category"> ${element.category} </div></div></div>`;
+
+                dataHTML = dataHTML +
+                    `<div class="bulletin" id=${element.id}><div class="bulletin-name"> ${element.productName}
+                 </div><div class="bulletin-description"> ${descriptionBr} </div><div class="footer-block"><div class="tags-hp">${tagsJSON}
+                 </div><div class="bulletin-category"> ${element.category} </div></div></div>`;
             });
             bulletinBoard.innerHTML = dataHTML;
             newAdID()
             if (localStorage.getItem('theme') == 'black') {
                 document.querySelectorAll('.bulletin').forEach(div => {
                     div.classList.add('black-input');
+
+                });
+                document.querySelectorAll('.footer-block').forEach(div => {
+                    div.classList.add('black-input');
                 });
             } else {
                 document.querySelectorAll('.bulletin').forEach(div => {
                     div.classList.remove('black-input')
                 });
+                document.querySelectorAll('.footer-block').forEach(div => {
+                    div.classList.remove('black-input');
+                });
             }
         })
-}   
+}
 LoadSixAds();
 
 let allPages = function () {
@@ -108,3 +118,4 @@ function filterUsed() {
 function unfilter() {
     window.location = serverPath
 }
+
