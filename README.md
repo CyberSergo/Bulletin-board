@@ -1,19 +1,10 @@
-"http://localhost:3000/api/6-ads/" - get request, for get 6 objects from array 'Bulletin-array'.
+To use global (secret) data, install "dotenv" - "npm install dotenv".
+Then create the ".ENV" file in the code directory and enter the following values ​​into it:
 
+DB_HOST = "Name of host.  Default - 'localhost'"
+DB_USER = "Name of user for open server SQL database"
+DB_NAME = "Your databse name for sql DB"
 
-"http://localhost:3000/api/add-ad/" - post request, for add your data to array 'Bulletin-array'.
+NUM_PAGES = "How many files do you want to show on your page. Default - '6'"
 
-
-"http://localhost:3000/api/single-ad/:id" - get request, for take 1 object from array 'Bulletin-array'. Replace ":id" with the numeric value "index in the array".
-
-
-"http://localhost:3000/api/all-ads/" - get request, for take all objects from array 'Bulletin-array'.
-
-
-"http://localhost:3000/api/number-of-pages/" - get request, to get the number of pages.
-
-
-"http://localhost:3000/api/page/:number" - request for put the number of page in variable.
-
-
-"http://localhost:3000/api/search/:id" - get request for searching objects in 'Bulletin-array'.
+SECRET_KEY = "Secret key for generating and decrypting the user's token"

@@ -6,16 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulletin Board</title>
+    <link rel="stylesheet" href="/public/css-style/user-style.css">
     <link rel="stylesheet" href="/public/css-style/style.css">
 </head>
 
 <body>
-
-    <div id="go-back">
-        <a href="http://localhost:3000/">go back</a>
+    <div id="header" class="header">
+        <div id="header-block" class="header-block">
+            <div id="go-back">
+                <p onclick="goBack()">go back</p>
+            </div>
+            <div id="user-menu" class="user-menu"></div>
+        </div>
     </div>
 
+    
+
     <form method="POST" id="form" action="http://localhost:3000/api/user/add-bulletin">
+        <div id="page-description">
+        <h2>To add new ads you must be <a href="http://localhost:3000/user/registration">registered</a> or <a href="http://localhost:3000/user/login">authorized</a></h2>
+    </div>
         <div class="bulletin-area">
             <div class="product-name">
                 <input name="productName" type="text" placeholder="Product name">
@@ -51,9 +61,11 @@
         </div>
     </form>
 
-
+    <div id="icon"><a href="https://icons8.com/icon/111487/search">Search icon by Icons8</a></div> 
+   
     <script src="/public/js/add.bulletin-page.js"></script>
     <script src="/public/js/themes.js"></script>
+    <script src="/public/js/header.js"></script>
 </body>
 
 </html>

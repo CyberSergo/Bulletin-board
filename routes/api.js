@@ -30,8 +30,13 @@ router.get("/single-ad/:id", cors(), getController.singleAd);
 router.get('/search/:query', getController.searchAds);
 
 // Add new ad in database 
-router.post("/user/add-bulletin", cors(), postController.newAd);
+router.post('/user/add-bulletin', cors(), postController.newAd);
 
+// Post registration request
+router.post('/user/registration', postController.registration);
+
+// Post authorization request
+router.post('/user/authorization', postController.authorization);
 
 
 

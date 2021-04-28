@@ -5,7 +5,7 @@ let pagesBlock = document.getElementById('pages');
 let searchButton = document.getElementById('search-button');
 let searchInput = document.getElementById('search-area');
 let siteMode = document.getElementById('site-mode');
-let userMenu = document.getElementById('user-menu')
+
 
 
 let serverPath = "http://localhost:3000";
@@ -21,9 +21,6 @@ let newAdID = function () {
     };
 };
 
-userMenu.addEventListener('click', event => {
-    window.location = `${serverPath}/user/add-bulletin`
-})
 
 let LoadSixAds = function (number) {
     if (number == undefined) {

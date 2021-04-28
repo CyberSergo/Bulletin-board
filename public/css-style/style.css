@@ -35,7 +35,6 @@ body {
 }
 
 .buttons button {
-  width: 20%;
   padding: 8px;
   border-radius: 5px;
   border: solid;
@@ -43,15 +42,16 @@ body {
   font-weight: bolder;
   transition-duration: 300ms;
   outline: none;
+  padding-inline: 10%;
 }
 
 .buttons button:hover {
-  width: 25%;
   padding: 10px;
   cursor: pointer;
   position: relative;
   border-radius: 20px;
   background-color: #b6ddff;
+  padding-inline: 10%;
 }
 
 .buttons {
@@ -81,8 +81,8 @@ body {
   border-radius: 3px;
   position: relative;
   max-height: 30vh;
-    box-sizing: border-box;
-    overflow: hidden;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 #bulletin-board .bulletin .bulletin-name {
@@ -145,6 +145,7 @@ body {
 #go-back {
   font-family: system-ui;
   margin-left: 13%;
+  cursor: pointer;
 }
 
 #pages {
@@ -206,20 +207,18 @@ body {
 }
 
 #icon a {
-  top: 97%;
-  color: black;
 }
 
 #user-menu {
   text-align: end;
 }
 
-#user-menu img{
+#user-menu img {
   width: 60px;
   cursor: pointer;
 }
 
-.black-user{
+.black-user {
   background-color: #dada02;
   border-radius: 100%;
 }
@@ -310,7 +309,7 @@ body {
 }
 
 .tag-small-block-black:hover {
-  background-color: #0404c1 !important; 
+  background-color: #0404c1 !important;
 }
 
 .tag-small-block:hover {
@@ -396,8 +395,7 @@ body {
   color: #dada02 !important;
 }
 
-#go-back a {
-  color: black;
+#go-back p {
   text-decoration: none;
   font-weight: 900;
 }
@@ -417,6 +415,16 @@ body {
   #form {
     width: 90%;
     margin-top: 0vh;
+  }
+
+  .description textarea {
+    padding: 0px;
+    padding-block: 7px;
+  }
+
+  #tags {
+    padding: 0px;
+    padding-block: 7px;
   }
 
   #bulletin-board {
@@ -442,8 +450,13 @@ body {
   }
 
   .product-name input {
-    margin-top: 10vh;
+    margin-top: 0vh;
     width: 60%;
+  }
+
+  #page-description {
+    text-align: center;
+    margin-top: 5vh;
   }
 
   #bulletin-board .bulletin .bulletin-name {
@@ -507,17 +520,18 @@ body {
     margin-bottom: 4vh;
     margin-top: 8vh;
     word-break: break-all;
-}
-.ad-description {
-  font-size: 1em;
-  font-family: sans-serif;
-  width: 95%;
-  margin: 0 auto;
-  background: white;
-  border-radius: 10px;
-  min-height: 40vh;
-  box-sizing: border-box;
-  padding: 30px;
-  word-break: break-all;
-}
+  }
+
+  .ad-description {
+    font-size: 1em;
+    font-family: sans-serif;
+    width: 95%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    min-height: 40vh;
+    box-sizing: border-box;
+    padding: 30px;
+    word-break: break-all;
+  }
 }

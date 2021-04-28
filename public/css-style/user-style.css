@@ -1,0 +1,103 @@
+form {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.input-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+#icon {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 97%;
+}
+
+.name-block {
+  width: 50%;
+}
+
+.description {
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-family: system-ui;
+  font-weight: 600;
+  margin-left: 10%;
+}
+
+.email-block {
+  width: 50%;
+}
+
+.password-block {
+  width: 50%;
+}
+
+.input-block-inside {
+  width: 50%;
+}
+
+.input-block-inside input {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 3vh;
+  border: 0;
+  background-color: #b6ddff;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: system-ui;
+}
+
+.confirm-password-block {
+  width: 50%;
+}
+
+.button-block-inside {
+  text-align: center;
+}
+
+.button-block-inside button {
+  padding: 8px;
+  border-radius: 5px;
+  border: solid;
+  font-family: system-ui;
+  font-weight: bolder;
+  transition-duration: 300ms;
+  outline: none;
+  cursor: pointer;
+  padding-inline: 5%;
+}
+
+.button-block-inside button:hover {
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 20px;
+  background-color: #b6ddff;
+  padding-inline: 5%;
+}
+
+#page-description {
+  text-align: center;
+}
+
+@media (max-device-width: 480px) {
+  form {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .description {
+    margin-left: 0%;
+    font-size: 1em;
+  }
+
+  .input-block-inside input {
+    box-sizing: border-box;
+  }
+}

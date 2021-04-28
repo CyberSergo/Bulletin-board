@@ -11,17 +11,22 @@ form.addEventListener('submit', event => {
     radio.forEach(e => {
         if (e.checked == true) {
             checkedRadio = e
-
         }
     })
 
-    let data = {};
-    let tagsValue = form.tags.value.split(',')
+    let tagsValue = form.tags.value.split(',');
 
-    data[form.productName.name] = form.productName.value
-    data[form.description.name] = form.description.value
-    data[checkedRadio.name] = checkedRadio.value
-    data[form.tags.name] = tagsValue
+    const data = {
+        'productName': form.productName.value,
+        'description': form.description.value,
+        'category': checkedRadio.value,
+        'tags': tagsValue,
+        'token': localStorage.getItem('auth')
+    }
+
+    if (data.token == null) {
+        return authError() 
+    }
 
     xhttp.open(form.method, form.action, true);
     xhttp.setRequestHeader('Content-Type', "application/json; charset=UTF-8");
@@ -29,12 +34,12 @@ form.addEventListener('submit', event => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             alert(this.responseText)
             if (this.responseText == 'Announcement added') {
-                window.location = serverPath
+                // window.location = serverPath
             }
         }
     }
     if (data.productName.trim() !== "") {
-        if (data.productName.trim() !== "") {
+        if (data.description.trim() !== "") {
             xhttp.send(JSON.stringify(data));
         } else {
             alert("Please fill in the product description")
@@ -44,3 +49,10 @@ form.addEventListener('submit', event => {
     }
     
 });
+
+
+function authError(){
+    let bulletinArea = document.getElementsByClassName('bulletin-area')[0]
+    
+    bulletinArea.innerHTML += `<p>You are nor authorized. Click on the link to <a href="http://localhost:3000/user/registration?">registration</a> or <a href="http://localhost:3000/user/login">login</a></p>`
+}

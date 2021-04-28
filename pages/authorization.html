@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization</title>
+    <link rel="stylesheet" href="/public/css-style/user-style.css">
+    <link rel="stylesheet" href="/public/css-style/style.css">
+</head>
+
+<body>
+
+    <div id="header" class="header">
+        <div id="header-block" class="header-block">
+            <div id="go-back">
+                <p onclick="goBack()">go back</p>
+            </div>
+            <div id="user-menu" class="user-menu"></div>
+        </div>
+    </div>
+
+    <div id="page-description">
+        <h1>Authorization</h1>
+    </div>
+    
+
+    <form>
+        <div class="input-block">
+            <div class="input-block-inside">
+                <input type="email" placeholder="Email@" name="email">
+            </div>
+            <div class="description">
+                Type your email
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-block-inside">
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <div class="description">
+                Type your password
+            </div>
+        </div>
+
+        <div class="registration-signature"><h4>If you do not have an account, please <a href="http://localhost:3000/user/registration">register</a> </h4></div>
+
+        <div class="button-block">
+            <div class="button-block-inside">
+                <button type="submit" id="button-submit-registration">Authorization</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="icon"><a href="https://icons8.com/icon/111487/search">Search icon by Icons8</a></div>
+
+    <script src="/public/js/authorization.js"></script>
+    <script src="../public/js/themes.js"></script>
+    <script src="/public/js/header.js"></script>
+</body>
+
+</html>

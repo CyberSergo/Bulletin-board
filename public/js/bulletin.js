@@ -19,7 +19,6 @@ fetch(`${serverPath}/api/single-ad/${id}`)
         return result.json()
     })
     .then(data => {
-        console.log(data[0].tags)
         let descriptionBr = data[0].description.replace(/\n/g, "<br />")
 
         productName.innerHTML = data[0].productName;
