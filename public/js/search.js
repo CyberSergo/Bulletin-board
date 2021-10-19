@@ -1,4 +1,3 @@
-
 let id = getUrlId()["id"];
 let bulletinBoard = document.getElementById('bulletin-board');
 let searchButton = document.getElementById('search-button');

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const cors = require('cors');
-const connectionMySQL = require('./databaseConfig')
 const api = require('./routes/api')
 
 
@@ -34,20 +33,19 @@ app.get('/user/add-bulletin', function (req, res) {
   res.sendFile(__dirname + '/pages/add-bulletin-page.html')
 });
 
-app.get('/user/registration', function(req, res) {
+app.get('/user/registration', function (req, res) {
   res.sendFile(__dirname + '/pages/registration.html')
 });
 
-app.get('/user/login', function(req, res) {
+app.get('/user/login', function (req, res) {
   res.sendFile(__dirname + '/pages/authorization.html')
 });
 
 
-const start = () => {
-  try {
-    app.listen(PORT, () => console.log(`The server is running on: http://localhost:${PORT}`));
-  } catch (err) {
-    console.log(err)
-  }
-};
-start(); 
+
+try {
+  app.listen(PORT, () => console.log(`The server is running on: http://localhost:${PORT}`));
+} catch (err) {
+  console.log(err)
+}
+

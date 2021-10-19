@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const connectionMySQL = require('../databaseConfig');
 let router = express.Router();
 const getController = require('../controllers/get.controllers')
 const postController = require('../controllers/post.controllers')
@@ -9,9 +8,6 @@ const postController = require('../controllers/post.controllers')
 router.use(cors());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
-
-
-const conn = connectionMySQL.connection;
 
 
 // Get number of pages 
